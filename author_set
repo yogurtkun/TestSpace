@@ -1,0 +1,65 @@
+import re
+import os
+
+#整理出爬下来的数据的
+
+at_info = r'./data'
+at_dict = {}
+
+#针对一些情况的进一步处理，提取出编号以及标题姓名
+mod_pattern = r'(.*?)@@@@@(.*?)$'
+global mod_com
+mod_com = re.compile(mod_pattern)
+
+#有些姓名分开记录的进行进一步处理，去掉这些tag
+author_pattern = r'<first>(.*?)</first>.*?<last>(.*?)</last>'
+global author_com
+author_com= re.compile(author_pattern)
+
+#对于一些不规范的信息进行进一步的处理，去掉各种html中的tag
+def modify_author(text):
+    if '<first>' in text:
+        pair = mod_com.findall(text)
+        title = pair[0][0]
+        pre_author = pair[0][1]
+        name_list = author_com.findall(pre_author)
+        author_string = ''
+        for item in name_list:
+            author_string += (item[0] + ' '+item[1]+'; ')
+            #print(author_string)
+        return title+'@@@@@'+author_string
+    else:
+        if '<last>' in text:
+            text = text.replace('<last>','')
+            text = text.replace('</last>','')
+        return text
+
+
+#这一步是整理提取的信息，把有多个title和author的文章去除
+def write_dict(path):
+    file_path = os.path.join(at_info,path)
+    with open(file_path,'rb') as file:
+        read_file = file.read().decode()
+        info_list = re.findall('([A-Z]\d{2}-\d{4}):(.*?)\n',read_file)
+        paper_dict = {}
+        remove_list = []
+        for item in info_list:
+            new_item = modify_author(item[1])
+            if item[0] in paper_dict:
+                paper_dict[item[0]].append(new_item)
+            else:
+                paper_dict[item[0]] = [new_item]
+        for item in paper_dict:
+            if(len(paper_dict[item])>1):
+                remove_list.append(item)
+        for item in remove_list:
+            paper_dict.pop(item)
+        for item in paper_dict:
+            write_file.write(item +':'+ paper_dict[item][0]+'\n')
+
+global write_file
+write_file = open(r'./titleset.txt','w')
+for parent,dirnames,filenames in os.walk(at_info):
+    for filename in filenames:
+        write_dict(filename)
+write_file.close()

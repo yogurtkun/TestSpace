@@ -1,0 +1,434 @@
+<html><head>
+<!-- 
+<img alt="new" src="images/new.gif"/> 
+<img alt="updated" src="images/updated.gif"/>
+-->
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+<title>ACL Anthology</title><link rel="stylesheet" type="text/css" href="antho.css" />
+<script type="text/javascript">
+function toggleLayer( whichLayer ) {
+  var elem, vis;
+  if( document.getElementById ) // this is the way the standards work
+    elem = document.getElementById( whichLayer );
+  else if( document.all ) // this is the way old msie versions work
+      elem = document.all[whichLayer];
+  else if( document.layers ) // this is the way nn4 works
+    elem = document.layers[whichLayer];
+  vis = elem.style;
+  // if the style.display value is blank we try to figure it out here
+  if(vis.display==''&&elem.offsetWidth!=undefined&&elem.offsetHeight!=undefined)
+    vis.display = (elem.offsetWidth!=0&&elem.offsetHeight!=0)?'block':'none';
+  vis.display = (vis.display==''||vis.display=='block')?'none':'block';
+}
+
+function submitFunction(i) {
+ var parent = document.getElementById('searchbox_011664571474657673452:4w9swzkcxiy');
+ var text = document.getElementById('search.q').value;
+ if (i==1) document.theForm.action="http://www.google.com/cse";
+ if (i==2) { 
+   text = text.replace(/\$/,"xxDOLLARxx");
+   text = text.replace(/\~/,"$_");
+   text = text.replace(/\*/,"$.");
+   text = text.replace(/xxDOLLARxx/,"$$");
+   parent.removeChild(document.getElementById('search.g1'));
+   parent.removeChild(document.getElementById('search.g2'));
+   document.getElementById('search.q').disabled = true;
+   document.getElementById('submit.sb').disabled = true;
+   if (text === "") {
+     document.theForm.action="http://aclasb.dfki.de/";
+   } else {
+     document.theForm.action="http://aclasb.dfki.de/#keyw~" + text + "*";
+   }
+ }
+ if (i==3) { 
+   parent.removeChild(document.getElementById('search.g1'));
+   parent.removeChild(document.getElementById('search.g2'));
+   document.getElementById('search.q').disabled = true;
+   document.getElementById('submit.aan').disabled = true;
+   if (text === "") {
+     document.theForm.action="http://clair.si.umich.edu/clair/anthology/";
+   } else {
+     parent.innerHTML += "<input name='query' type='hidden' value='" + text + "'/><br />";
+     document.theForm.action="http://clair.si.umich.edu/clair/anthology/search.cgi";
+   }
+ }
+ if (i==4) { 
+   parent.removeChild(document.getElementById('search.g1'));
+   parent.removeChild(document.getElementById('search.g2'));
+   document.getElementById('search.q').disabled = true;
+   document.getElementById('submit.saffron').disabled = true;
+   if (text === "") {
+     document.theForm.action="http://saffron.deri.ie/acl#";
+   } else {
+     document.theForm.action="http://saffron.deri.ie/acl#/search/" + text;
+   }
+ }
+ document.theForm.submit()
+}
+</script>
+</head>
+
+<body>
+<div class="header">
+<a href=".."><img src="images/acl-logo.gif" width=71px height=48px border=0 align="left" alt="ACL Logo"></a>
+<span class="title">ACL Anthology</span><br/>
+<span class="subtitle">A Digital Archive of Research Papers in Computational Linguistics</span>
+</div>
+<hr>
+
+<!-- -------------------------------------------------------------------------------- -->
+<div id="content">
+
+<!-- Search Box Begins  -->
+  <form name="theForm" id="searchbox_011664571474657673452:4w9swzkcxiy" action="http://www.google.com/cse">
+  Search the Anthology
+    <input id="search.g1" type="hidden" name="cx" value="011664571474657673452:4w9swzkcxiy" />
+    <input id="search.g2" type="hidden" name="cof" value="FORID:0" />
+    <input id="search.q" name="q" type="text" size="40" style="font-size:8pt" />
+    <INPUT TYPE="button" name="sa" value="via Google" style="font-size:8pt" onClick="submitFunction(1)">
+    <INPUT id="submit.sb" TYPE="button" VALUE="via Searchbench @ DFKI" style="font-size:8pt" onClick="submitFunction(2)">
+    <INPUT id="submit.aan" TYPE="button" VALUE="via AAN @ UMich" style="font-size:8pt" onClick="submitFunction(3)">
+    <INPUT id="submit.saffron" TYPE="button" VALUE="via Saffron @ DERI" style="font-size:8pt" onClick="submitFunction(4)">
+  </form>
+
+<!-- Search Box Ends -->
+
+<p>The ACL Anthology currently hosts over 36,000 papers on the study
+ of computational linguistics and natural language processing.  <a
+href="http://groups.google.com/group/acl-anthology?hl=en">Subscribe to
+the mailing list</a> to receive announcements and updates to the
+Anthology.</P>
+
+<P><img alt="new" src="images/new.gif"/>The <A
+HREF="http://aclanthology.info" target="_blank">beta version of the
+new ACL Anthology goes live</A>.  It will replace this current version
+of the Anthology as the default version starting 2016 (don't worry we
+will still maintain both for some duration for handover).
+
+<P>Do you love the Anthology?  Not an ACL member yet?  Please <A HREF="http://www.aclweb.org/portal/user/register">join as an ACL member</A> to help keep the Anthology open for all to use.
+
+<P>
+<img alt="new" src="images/new.gif"/>January 2016: 
+The <A HREF="J/J15/#4000">December issue of <I>Computational Linguistics</I></A> is now available on the ACL Anthology.  Articles from the <A HREF="Q/Q16"><I>Transactions of the ACL</I></A> for 2016 will be regularly ingested on a monthly basis.
+</P>
+
+<h3 title="Events sponsored by ACL, chapters or SIGs">ACL events</h3>
+<table border="0" width="100%" style="padding:0px">
+  <tr><th title="Computational Linguistics Journal">CL:</th>
+  <td> <a href="docs/cl.html"><b>Intro</b></a>
+<a title="The Finite String Newsletter" href="docs/fs.html"><b>FS</b></a>
+<a title="Machine Translation and Computational Linguistics Journal, precursor to CL" href="docs/mtcl.html"><b>MT&amp;CL</b></a>
+       <a href="J/J79/">74-79</a>  <a href="J/J80/">80</a>
+       <a href="J/J81/">81</a> <a href="J/J82/">82</a> <a href="J/J83/">83</a> <a href="J/J84/">84</a> <a href="J/J85/">85</a>
+       <a href="J/J86/">86</a> <a href="J/J87/">87</a> <a href="J/J88/">88</a> <a href="J/J89/">89</a> <a href="J/J90/">90</a>
+       <a href="J/J91/">91</a> <a href="J/J92/">92</a> <a href="J/J93/">93</a> <a href="J/J94/">94</a> <a href="J/J95/">95</a>
+       <a href="J/J96/">96</a> <a href="J/J97/">97</a> <a href="J/J98/">98</a> <a href="J/J99/">99</a> <a href="J/J00/">00</a>
+       <a href="J/J01/">01</a> <a href="J/J02/">02</a> <a href="J/J03/">03</a> <a href="J/J04/">04</a> <a href="J/J05/">05</a>
+       <a href="J/J06/">06</a> <a href="J/J07/">07</a> <a href="J/J08/">08</a> <a href="J/J09/">09</a> <a href="J/J10/">10</a>
+       <a href="J/J11/">11</a> <a href="J/J12/">12</a> <a href="J/J13/">13</a> <a href="J/J14/">14</a> <a href="J/J15/">15</a>
+  </td></tr>
+
+  <tr><th title="Transactions of the Association of the Computational Linguistics">TACL:</th>
+  <td> <img alt="new" src="images/new.gif"/><a href="Q/Q16/">16</a> <a href="Q/Q15/">15</a> <a href="Q/Q14/">14</a> <a href="Q/Q13/">13</a>
+  </td></tr>
+
+  <tr><th title="ACL Annual Meeting">ACL:</th>
+  <td> <a href="docs/acl.html"><b>Intro</b></a>
+       <a href="P/P79/">79</a> <a href="P/P80/">80</a>
+       <a href="P/P81/">81</a> <a href="P/P82/">82</a> <a href="P/P83/">83</a> <a href="P/P84/">84</a><sup>*</sup> <a href="P/P85/">85</a>
+       <a href="P/P86/">86</a> <a href="P/P87/">87</a> <a href="P/P88/">88</a> <a href="P/P89/">89</a> <a href="P/P90/">90</a>
+       <a href="P/P91/">91</a> <a href="P/P92/">92</a> <a href="P/P93/">93</a> <a href="P/P94/">94</a> <a href="P/P95/">95</a>
+       <a href="P/P96/">96</a> <a href="P/P97/">97</a><sup>*</sup> <a href="P/P98/">98</a><sup>*</sup> <a href="P/P99/">99</a> <a href="P/P00/">00</a>
+       <a href="P/P01/">01</a> <a href="P/P02/">02</a> <a href="P/P03/">03</a> <a href="P/P04/">04</a> <a href="P/P05/">05</a>
+       <a href="P/P06/">06</a><sup>*</sup> <a href="P/P07/">07</a> <a href="P/P08/">08</a><sup>*</sup> <a href="P/P09/">09</a><sup>*</sup> <a href="P/P10/">10</a>
+       <a href="P/P11/">11</a> <a href="P/P12/">12</a> <a href="P/P13/">13</a> <a href="P/P14">14</a> <a href="P/P15/">15</a><sup>*</sup>
+  </td></tr>
+
+  <tr><th title="European Chapter of ACL">EACL:</th>
+  <td> <a href="docs/eacl.html"><b>Intro</b></a>
+       <a href="E/E83/">83</a> <a href="E/E85/">85</a>
+       <a href="E/E87/">87</a> <a href="E/E89/">89</a>
+       <a href="E/E91/">91</a> <a href="E/E93/">93</a> <a href="E/E95/">95</a>
+       <a href="P/P97/">97</a><sup>*</sup> <a href="E/E99/">99</a>
+       <a href="E/E03/">03</a> <a href="E/E06/">06</a> <a href="E/E09/">09</a>
+       <a href="E/E12/">12</a>
+       <a href="E/E14/">14</a>
+  </td></tr>
+
+  <tr><th title="North American Chapter of ACL">NAACL:</th>
+  <td> <a href="docs/naacl.html"><b>Intro</b></a>
+       <a href="A/A00/">00</a><sup>*</sup>
+       <a href="N/N01/">01</a> <a href="N/N03/">03</a> <a href="N/N04/">04</a>
+       <a href="N/N06/">06</a><sup>*</sup> <a href="N/N07/">07</a><sup>*</sup>
+       <a href="N/N09/">09</a><sup>*</sup> <a href="N/N10/">10</a><sup>*</sup>
+       <a href="N/N12/">12</a><sup>*</sup> <a href="N/N13/">13</a><sup>*</sup> <a href="N/N15/">15</a><sup>*</sup>
+  </td></tr>
+
+  <tr><th title="Conference on Empirical Methods in Natural Language Processing (and forerunners)">EMNLP:</th>
+  <td> 
+       <a href="D/D96/">96</a> <a href="D/D97/">97</a> <a href="D/D98">98</a> <a href="D/D99">99</a> <a href="D/D00">00</a>
+       <a href="D/D01/">01</a> <a href="D/D02/">02</a> <a href="D/D03">03</a> <a href="D/D04">04</a> <a href="D/D05">05</a>
+       <a href="D/D06/">06</a> <a href="D/D07/">07</a><sup>*</sup> <a href="D/D08/">08</a> <a href="D/D09/">09</a> <a href="D/D10/">10</a>
+       <a href="D/D11/">11</a> <a href="D/D12/">12</a><sup>*</sup> <a href="D/D13">13</a> <a href="D/D14">14</a> <a href="D/D15">15</a>
+  </td></tr>
+
+  <tr><th title="Conference on Computational Natural Language Learning">CoNLL:</th>
+  <td> <a href="K/K97/">97</a> <a href="K/K98/">98</a> <a href="K/K99/">99</a> <a href="K/K00/">00</a>
+       <a href="K/K01/">01</a> <a href="K/K02/">02</a> <a href="K/K03/">03</a> <a href="K/K04/">04</a> <a href="K/K05/">05</a>
+       <a href="K/K06/">06</a> <a href="K/K07/">07</a> <a href="K/K08/">08</a> <a href="K/K09/">09</a> <a href="K/K10">10</a>
+       <a href="K/K11/">11</a> <a href="K/K12/">12</a> <a href="K/K13/">13</a> <a href="K/K14/">14</a> <a href="K/K15/">15</a>
+  </td></tr>
+
+  <tr><th title="Lexical and Computational Semantics and Semantic Evaluation (formerly Workshop on Sense Evaluation)">*Sem/<BR/>SemEval:</th>
+  <td>
+       <a href="S/S98/">98</a> 
+       <a href="S/S01/">01</a> <a href="W/W04#0800">04</a>
+       <a href="S/S07/">07</a> <a href="S/S10/">10</a>
+       <a href="S/S12/">12</a> <a href="S/S13/">13</a> <a href="S/S14/">14</a> <a href="S/S15/">15</a>
+  </td></tr>
+
+  <tr><th title="Applied Natural Language Processing Conference">ANLP:</th>
+  <td> <a href="docs/anlp.html"><b>Intro</b></a> <a href="A/A83/">83</a>
+       <a href="A/A88/">88</a>
+       <a href="A/A92/">92</a> <a href="A/A94/">94</a>
+       <a href="A/A97/">97</a> <a href="A/A00/">00</a><sup>*</sup>
+  </td></tr>
+
+  <tr><th title="Complete workshop listing, sorted by year">Workshops:</th>
+  <td> <a href="W/W90/">90</a>
+       <a href="W/W91/">91</a> <a href="W/W93/">93</a> <a href="W/W94/">94</a> <a href="W/W95/">95</a>
+       <a href="W/W96/">96</a> <a href="W/W97/">97</a> <a href="W/W98/">98</a> <a href="W/W99/">99</a> <a href="W/W00/">00</a>
+       <a href="W/W01/">01</a> <a href="W/W02/">02</a> <a href="W/W03/">03</a> <a href="W/W04/">04</a> <a href="W/W05/">05</a>
+       <a href="W/W06/">06</a> <a href="W/W07/">07</a> <a href="W/W08/">08</a> <a href="W/W09/">09</a> <a href="W/W10">10</a>
+       <a href="W/W11/">11</a> <a href="W/W12/">12</a> <a href="W/W13/">13</a> <a href="W/W14/">14</a> <img alt="updated" src="images/updated.gif"/><a href="W/W15/">15</a>
+  </td></tr>
+
+  <tr><th title="Special Interest Group Meetings">SIGs:</th>
+  <td>
+<a href="sigann.html" title="Annotation">ANN</a> 
+<a href="sigbiomed.html" title="Biomedical NLP">BIOMED</a>
+<a href="sigdat.html" title="Linguistic Data and Corpus-Based Approaches to NLP">DAT</a>
+<a href="sigdial.html" title="Discourse and Dialogue">DIAL</a>
+<a href="sigfsm.html" title="Finite State Machine">FSM</a>
+<a href="siggen.html" title="Natural Language Generation">GEN</a>
+<a href="sighan.html" title="Chinese Language Processing">HAN</a>
+<a href="sighum.html" title="Language Technologies for the Socio-Economic Sciences and Humanities">HUM</A>
+<a href="siglex.html" title="Lexicon">LEX</a>
+<a href="sigmedia.html" title="Multimedia Language Processing">MEDIA</a>
+<a href="sigmol.html" title="Mathematics of Language">MOL</a>
+<a href="sigmt.html" title="Machine Translation">MT</a>
+<a href="signll.html" title="Natural Language Learning">NLL</a>
+<a href="sigparse.html" title="Natural Language Parsing">PARSE</a>
+<a href="sigmorphon.html" title="Computational Morphology and Phonology">MORPHON</a>
+<a href="sigsem.html" title="Computational Semantics">SEM</a>
+<a href="sigslav.html" title="Slavic Natural Language Processing">SLAV</a>
+<a href="semitic.html" title="Computational Approaches to Semitic Languages">SEMITIC</a>
+<a href="sigslpat.html" title="Speech and Language Processing for Assistive Technologies">SLPAT</a>
+<a href="sigwac.html" title="Web as Corpus">WAC</a> 
+  </td></tr>
+</table>
+
+<h3 title="Other computational linguistics events">Other Events</h3>
+<table width="100%" style="padding:0px" border="0px">
+  <tr><th title="Int'l Committee on Computational Linguistics (ICCL) Conf.">COLING:</th>
+  <td colspan=5> <a href="C/C65/">65</a> <a href="C/C67/">67</a> <a href="C/C69/">69</a>
+       <a href="C/C73/">73</a>
+       <a href="C/C80/">80</a> <a href="C/C82/">82</a> <a href="P/P84/">84</a><sup>*</sup> <a href="C/C86/">86</a> <a href="C/C88/">88</a> 
+       <a href="C/C90/">90</a> <a href="C/C92/">92</a> <a href="C/C94/">94</a> <a href="C/C96/">96</a> <a href="P/P98/">98</a><sup>*</sup> <a href="C/C00/">00</a>
+       <a href="C/C02/">02</a> <a href="C/C04/">04</a> <a href="P/P06/">06</a><sup>*</sup> <a href="C/C08/">08</a> <a href="C/C10/">10</a>
+       <a href="C/C12/">12</a> <a href="C/C14/">14</a>
+  </td></tr>
+
+  <tr><th title="Human Language Technology Conf.">HLT:</th>
+  <td colspan=5> <a href="H/H86/">86</a> <a href="H/H89/">89</a> <a href="H/H90/">90</a>
+       <a href="H/H91/">91</a> <a href="H/H92/">92</a> <a href="H/H93/">93</a> <a href="H/H94/">94</a>
+       <a href="H/H01/">01</a> <a href="N/N03/">03</a><sup>*</sup><nobr> <a href="N/N04/">04</a><sup>*</sup><nobr> <a href="H/H05/">05</a>
+       <a href="N/N06/">06</a><sup>*</sup> <a href="N/N07/">07</a><sup>*</sup> <a href="P/P08/">08</a><sup>*</sup> <a href="N/N09/">09</a><sup>*</sup> <a href="N/N10/">10</a><sup>*</sup>
+       <a href="N/N12/">12</a><sup>*</sup> <a href="N/N13/">13</a><sup>*</sup> <a href="N/N15/">15</a><sup>*</sup>
+  </td></tr>
+
+<tr><th title="Int'l Joint Conf. on Natural Language Processing (and workshops)">IJCNLP:</th>
+<td> <a href="I/I05/">05</a> <a href="I/I08/">08</a> <a href="P/P09/">09</a><sup>*</sup> <a href="I/I11/">11</a> <a href="I/I13">13</a> <a href="P/P15/">15</a><sup>*</sup>
+  </td>
+<th title="Australasian Language Technology Association Workshop">ALTA</th>
+  <td> <a href="docs/alta.html"><b>Intro</b></a> 
+       <a href="U/U03/">03</a> <a href="U/U04/">04</a> <a href="U/U05/">05</a> 
+       <a href="U/U06/">06</a> <a href="U/U07/">07</a> <a href="U/U08/">08</a> <a href="U/U09/">09</a> <a href="U/U10/">10</a> 
+       <a href="U/U11/">11</a> <a href="U/U12/">12</a> <a href="U/U13/">13</a> <a href="U/U14/">14</a> <img alt="new" src="images/new.gif"/><a href="U/U15/">15</a>
+
+  </td>
+</tr>
+<tr><th title="International Conference on Language Resources and Evaluation">LREC:</th>
+  <td> <a href="L/L00/">00</a> <a href="L/L02/">02</a> <a href="L/L04/">04</a>
+       <a href="L/L06/">06</a> <a href="L/L08/">08</a> <a href="L/L10/">10</a>
+       <a href="L/L12/">12</a> <a href="L/L14/">14</a>
+  </td>
+  <th title="International Conference Recent Advances in Natural Language Processing">RANLP</th>
+  <td> <a href="R/R09/">09</a> <a href="R/R11/">11</a> <a href="R/R13">13</a> <img alt="new" src="images/new.gif"/><a href="R/R15">15</a>
+
+</tr>
+
+<tr><th title="Pacific Asia Conference on Language, Information and Computation">PACLIC</th>
+  <td> 
+<a href="Y/Y95/">95</a>
+<a href="Y/Y96/">96</a> <a href="Y/Y98/">98</a> <a href="Y/Y99/">99</a> <a href="Y/Y00/">00</a>
+<a href="Y/Y01/">01</a> <a href="Y/Y02/">02</a> <a href="Y/Y03/">03</a> <a href="Y/Y04/">04</a> <a href="Y/Y05/">05</a>
+<a href="Y/Y06/">06</a> <a href="Y/Y07/">07</a> <a href="Y/Y08/">08</a> <a href="Y/Y09/">09</a> <a href="Y/Y10/">10</a>
+<a href="Y/Y11/">11</a> <a href="Y/Y12/">12</a> <a href="Y/Y13">13</a> <a href="Y/Y14">14</a> <img alt="new" src="images/new.gif"/> 
+<a href="Y/Y15">15</a>
+  </td>
+  <th title="">JEP/TALN/RECITAL</th>
+  <td>
+<a href="F/F12/">12</a> <a href="F/F13/">13</a> <a href="F/F14/">14</a> 
+</td>
+</tr>
+
+<tr><th title="Rocling Computation Linguistics Conference and Journal">Rocling</th>
+  <td> <a href="docs/rocling.html"><b>Intro</b></a>
+<a href="O/O88/">88</a> <a href="O/O89/">89</a> <a href="O/O90/">90</a>
+<a href="O/O91/">91</a> <a href="O/O92/">92</a> <a href="O/O93/">93</a> <a href="O/O94/">94</a> <a href="O/O95/">95</a>
+<a href="O/O96/">96</a> <a href="O/O97/">97</a> <a href="O/O98/">98</a> <a href="O/O99/">99</a> <a href="O/O00/">00</a>
+<a href="O/O01/">01</a> <a href="O/O02/">02</a> <a href="O/O03/">03</a> <a href="O/O04/">04</a> <a href="O/O05/">05</a>
+<a href="O/O06/">06</a> <a href="O/O07/">07</a> <a href="O/O08/">08</a> <a href="O/O09/">09</a> <a href="O/O10/">10</a>
+<a href="O/O11/">11</a> <a href="O/O12/">12</a> <a href="O/O13/">13</a> <a href="O/O14/">14</a> <a href="O/O15/">15</a>
+  </td>
+  <th title="Message Understanding Conf.">MUC:</th>
+  <td> <a href="M/M91/">91</a> <a href="M/M92/">92</a> <a href="M/M93/">93</a> <a href="M/M95/">95</a>
+       <a href="M/M98/">98</a>
+  </td>
+</tr>
+<tr>  <th title="Theoretical Issues In Natural Language Processing">TINLAP:</th>
+  <td> <a href="T/T75/">75</a>
+       <a href="T/T78/">78</a>
+       <a href="T/T87/">87</a>
+  </td>
+  <th title="NIST's TIPSTER Text Program">Tipster:</th>
+  <td><a href="X/X93/">93</a>
+      <a href="X/X96/">96</a> <a href="X/X98/">98</a>
+  </td>
+</tr>
+
+<tr>
+  <th onmouseover="tooltip('Missing articles -- please help!')" onmouseout="exit()">Donors Needed:</th>
+  <td><a href="C/C65">COLING-65</a>, any missing COLING
+  <th title="Anthology work-in-progress">In Progress:</th>
+  <td>Finite String</td>
+</td>
+</tr>
+</table>
+
+<p>*: denotes a joint meeting</p>
+
+<p>&raquo; <a href="javascript:toggleLayer('notes')">Toggle Notes</a> </p>
+
+<div style="display:none" id="notes">
+<p><b>Usage Notes:</b> To select single column text from any PDF article, use
+Ctrl (Unix), Ctrl-Alt (PC), Option-Command (Mac) in conjunction
+with the mouse.</p>
+
+<p><b>BibTeX Bibliographies<sup>1</sup></b>: <a href="http://www.essex.ac.uk/linguistics/research/resgroups/clgroup/aclbib/">Doug Arnold</a> <img width="10px" height="10px" src="images/external.gif" border="0" /> <br/>
+1: SIGs and individuals, please consider compiling annotated bibliographies for your fields of interest, linking in to the ACL Anthology using our persistent URLs.  Links to your bibliographies will be posted here.
+
+<p><b>News:</b>
+Jan 2016: J15-4; Q16-1;
+Dec 2015: Y15; U15; R15; W15-52 thru W15-55; W15-56;
+Nov: O15;
+Oct: W14-70; W15-50; W15-51;
+Sep: W15-46; W15-47; D15; W15-24 thru W15-30; W15-48; W15-49; 
+Jul: W15-21; W15-23; P15; K15;
+Jun: J15-2;
+May: W15-18 thru W15-20; S15; N15; W15-05 thru W15-15
+Apr: W15-01 thru W15-04; J15-1;
+Feb 2015: W14-69; Y14;
+Nov 2014: J14-4; O14; U14; W14-35;
+Oct: W14-63 thru W14-68; F14; D14; W14-36 thru W14-37; W14-39 thru W14-42;
+Sep: K97 thru K14; J14-3; W14-44; W14-50;
+Aug: C14; S14; W14-45 thru W14-62;
+Jul: J14-2; W14-43;
+Jun: L14; P14; W14-15 thru W14-34;
+Apr: W14-01 thru W14-14; E14;
+Mar: Y13; J14-1;
+Feb 2014: W13-55; F13;
+Dec 2013: U13; O13;
+Nov: R13; W13-51 thru W13-53; W13-38; J13-4; 
+Oct: W13-41 thru W13-47; W13-49 thru W13-50; D13; I13; W02-21;
+Sep: O09 thru O12; W13-48; W11-45;
+Aug: P13; W13-18 thru W13-36; J13-3; W13-40; W13-37; 
+Jul: W13-18;
+May: J13-2; N13; W13-08 thru W13-17; S13; 
+Apr: Q13-1;
+Mar: J12-1; C12; W12-47 thru W12-61; W13-01 thru W13-07;
+Jan 2013: W12-63;
+Dec 2012: W12-62; O12; U12; Y12; Nov: J12-4; Oct: L12; Sep: W98-15; Aug: J12-3; Jul: P12; D12; W12-32 thru W12-45; W12-15; F12; W12-11 thru W12-14; Jun: W12-16; May: Y08-Y11; W12-17 thru W12-31; N12; S12; Apr: E12; W12-01 thru W12-10; Feb: Revamped beta goes live; Jan 2012: J12-1;
+Dec 2011: S01; U11; L06; L04; L02; L00; W00-15 thru W00-19; Nov: W11-29; W11-39 thru W11-43; W11-44; R11; L10; O11; J11-4; Oct: W11-29, W11-38; I11; W11-30 thru W11-37; Sep: J11-3; Jul: D11; W11-21 thru W11-27; Jun: P11; W11-02 thru W11-19; W11-20; Search connectors to Searchbench and AAN; May: J11-2; Mar: J11-1; Feb: U03, U04, U10; Jan 2011: W11-01; 
+Dec 2010: S98; J10-4; Nov: E03 (updated); Sep: J10-3; O10; W10-41; Aug: C10; W10-32 thru W10-40; Jul: P10; S10; W10-17 thru W10-30; R09; W09-40 thru W09-45; W10-31; May: J10-2; N10; W10-1 thru W10-16; Apr: U05 thru U09; Mar: O88 thru O09; Y95 thru Y07; Feb: J10-1; 
+Dec 2009: J09-4; Oct: W09-38; Sep: J09-3, W09-39;  Aug: P09, D09, W09-25 thru W09-36, W09-37; May: J09-2, N09, W09-11 thru W09-24; Mar: J09-1, E09, W09-1 thru W09-10; Feb: W03-29, W05-11, J08; 
+Dec 2008: I05-1, J07; Nov: L08; Oct: W03-28, D08; Sep: C08, W08-12 thru W08-21; DOIs for all X, ACL-owned W02s; W08-22; Jul: FS, DOIs for P79-P06, minor metadata repair on P79-P06, W08-11, I08; Jun: P08, W08 (01-10); May: MT&amp;CL;  Apr: J06; Mar: W01-0500 (EMNLP 01), W04-3200 (EMNLP 04), W03-22 thru W03-27 (EACL Workshops), Anthology facelift;  Feb: M98, W03 (SIGdial '03), W04 (SIGdial '04);
+Jan: W07-23, Min-Yen Kan takes over editorship of the Anthology;
+May 2007: J05; Apr: N07, W07, about 12,500 papers in total; Jan: C04, N04, W04;
+Sep 2006: P04; Jul: P06, N06; May: E06; Jan: J04, AJCL issues from the 1970s (from microfiche); the anthology now contains 10110 papers.
+Nov 2005: HLT/EMNLP; Oct: IJCNLP; Jul: ACL; Jun: Three volumes of DARPA proceedings donated by Beth Sundheim, bringing the total to 9365 papers; Mar: Twelve volumes of DARPA proceedings (5,000pp) donated by Dave Lewis and Beth Sundheim have been digitized and added to the Anthology;
+Sep 2004: Added J03; May: Added J02, W02; the anthology now contains 8350 papers. Apr: Anthology now incorporated into <a href="http://portal.acm.org/dl.cfm">ACM Digital Library</a> <img width="10px" height="10px" src="images/external.gif" border="0" />; 
+The anthology helps your citation counts - most papers are now indexed by <a href="http://citeseer.ist.psu.edu/">Citeseer</a> <img width="10px" height="10px" src="images/external.gif" border="0" /> and <a href="http://scholar.google.com/">Scholar</a> <img width="10px" height="10px" src="images/external.gif" border="0" />.
+
+<p><b>Importing Materials:</b>  Since 2000, ACL materials have been 'born digital', and distributed on CD-ROM.  The bulk of the materials in the Anthology prior to 2000 were scanned from paper copy.  Conference organizers wanting their materials included in the Anthology need to arrange for the materials to be delivered in the <a href="importing.html">Anthology Format</a>.</p>
+
+<p><b>Citing:</b> Please do not publish links to this site in print publications.  Instead use the persistent URL resolver on the ACL site, e.g.  <a href="http://www.aclweb.org/anthology/E91-1001">http://www.aclweb.org/anthology/E91-1001</a> (thanks to Dragomir Radev and Haejoong Lee).</p>
+
+<p><b>Plain text:</b> <a href="http://acl-arc.comp.nus.edu.sg/">ASCII text and other metadata for a controlled subset of the Anthology</a> <img width="10px" height="10px" src="images/external.gif" border="0" />.</p>
+
+<p><b>Reflections:</b> <a href="docs/joshi.html">Aravind Joshi</a> <a href="docs/ksj.html">Karen Sparck Jones</a></p>
+</div>
+
+<p><b><a href="http://www.aclweb.org/membership/">Join the Association
+for Computational Linguistics (ACL):</a></b> Benefits include
+discounts on conferences and publications, and membership in special
+interest groups.
+</div>
+
+<!-- -------------------------------------------------------------------------------- -->
+
+<hr><div class="footer">
+&raquo; <a href="javascript:toggleLayer('footer1')">Toggle Copyright and Credits</a> <br/>
+<div id="footer1" style="display:none">
+<!-- Creative Commons License -->
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+<img alt="Creative Commons License" border="0" width="88px" height="31px"align="right" src="http://creativecommons.org/images/public/somerights20.png" /></a>
+<!-- /Creative Commons License -->
+<!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> -->
+<!--
+<Work rdf:about="">
+  <license rdf:resource="http://creativecommons.org/licenses/by/4.0/" />
+  <dc:title>ACL Anthology</dc:title>
+  <dc:date>2006</dc:date>
+  <dc:description>A Digital Archive of Research Papers in Computational Linguistics</dc:description>
+  <dc:creator><Agent><dc:title>Min-Yen Kan</dc:title></Agent></dc:creator>
+  <dc:rights><Agent><dc:title>Association for Computational Linguistics</dc:title></Agent></dc:rights>
+  <dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+  <dc:source rdf:resource="http://www.aclweb.org/anthology/" />
+</Work>
+-->
+<License -->
+<!-- rdf:about="http://creativecommons.org/licenses/by/4.0/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/></License></rdf:RDF> -->
+
+<p>
+ACL materials are Copyright (C) 1963-2016 <a href="http://www.aclweb.org/">ACL</a>; other materials are copyrighted by their respective copyright holders.  All materials prior to 2016 here are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License</a> <img width="10px" height="10px" src="images/external.gif" border="0" />.  Permission is granted to make copies for the purposes of teaching and research.  Materials published in or after 2016 are licensed on a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 License</A>.  
+</p>
+
+
+<p>
+<a href="credits.html">Credits</a>: The institutions and individuals behind the ACL Anthology. <br/>
+</p>
+</div>
+<p>
+<a href="http://www.comp.nus.edu.sg/~kanmy/">Min-Yen Kan</a> <img width="10px" height="10px" src="images/external.gif" border="0" /> (Editor, 2008-) /
+<a href="http://stevenbird.me/">Steven Bird</a> <img width="10px" height="10px" src="images/external.gif" border="0" /> (Editor, 2001-2007)
+</p>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript" />
+<script type="text/javascript">
+_uacct = "UA-2482907-1";
+urchinTracker();
+</script>
+
+</div></body></html>
