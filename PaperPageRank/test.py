@@ -1,5 +1,6 @@
-from function_tool import get_rank_paper_list
+a = {'a':1,'b':2,'c':3,'f':7}
 
-a = get_rank_paper_list('./result/scores_1.txt')
+print(a)
 
-print(len(a))
+b = list(a)
+print(b)
