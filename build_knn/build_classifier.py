@@ -36,12 +36,12 @@ def give_label(filename):
     text_data = read_file.translate(trans_table)
     tran_text_data = tfidf_vect.transform([text_data])
     predict_label = knnClf.predict(tran_text_data)
-    log_file.write(file_id + ' ' + str(predict_label[0])+'\n')
     label_info_dict[file_id] = str(predict_label[0])
 
 log_file = open('./log.txt','w')
 tfidf_vect = TfidfVectorizer(tokenizer= my_tokenize, stop_words='english',max_df = 0.5)  #tfidf转换向量矩阵
-label_info_file = open('./label_info.txt','w')
+#label_info_file = open('./label_info.txt','w')
+label_info_file = open('./label_sum.txt','w')
 label_info_dict = {}
 
 #读取信息
@@ -59,21 +59,29 @@ knnClf = KNeighborsClassifier(n_neighbors=20)
 knnClf.fit(tfidf_mat,class_id_list)  #training the classifier
 #joblib.dump(knnClf,'./knn_model.m')
 
-data_dir = '../lin_txt_processed/'
-# count = 0
-for parent,dirnames,filenames in os.walk(data_dir):
-    for filename in filenames:
-        if re.match('[A-Z]\d{2}-\d{4}',filename):
-            if '000' in filename:
-                continue
-            give_label(filename)
-            # count += 1
-            # if count == 100:
-            #     break
+# data_dir = '../lin_txt_processed/'
+
+# for parent,dirnames,filenames in os.walk(data_dir):
+#     for filename in filenames:
+#         if re.match('[A-Z]\d{2}-\d{4}',filename):
+#             if '000' in filename:
+#                 continue
+#             give_label(filename)
+
+the_result = knnClf.predict(tfidf_mat)
+record_dict = {}
+for itera in range(len(the_result)):
+    if str(class_id_list[itera]) not in record_dict:
+        record_dict[str(class_id_list[itera])] = {}
+    if str(the_result[itera]) not in record_dict[str(class_id_list[itera])]:
+        record_dict[str(class_id_list[itera])][str(the_result[itera])] = 0;
+    else:
+        record_dict[str(class_id_list[itera])][str(the_result[itera])] += 1;
+
+
 
 #log_file.write(str(label_info_dict))
-print(label_info_dict)
-label_info_json = json.dumps(label_info_dict,ensure_ascii=False)
+label_info_json = json.dumps(record_dict,ensure_ascii=False)
 label_info_file.write(label_info_json)
 
 label_info_file.close()

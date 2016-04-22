@@ -15,7 +15,7 @@ import scipy.spatial.distance as dis
 
 stemmer = PorterStemmer()
 trans_table = {ord(c): None for c in string.punctuation}  #去掉标点符号的转换矩阵
-dict_path = '../un_mod_mat/'
+dict_path = '../un_mod_mat/'  #常用的字典的存储路径
 
 #还原成词根
 def stem_tokens(tokens,stemmer):
@@ -39,15 +39,57 @@ def give_label(filename):
     text_data = read_file.translate(trans_table)
     tran_text_data = tfidf_vect.transform([text_data])
     (distance,neigh) = knn_Clf.kneighbors(tran_text_data)
-    near_20 = neigh[0]
-    #predict_label = knnClf.predict(tran_text_data)
-    #log_file.write(file_id + ' ' + str(predict_label[0])+'\n')
-    #label_info_dict[file_id] = str(predict_label[0])
+    if not file_id in id_author_dict:
+        return
+    author_list = id_author_dict[file_id]
+    author_set = set(author_list)
+    near_20 = list(map(lambda x:[text_id_list[x],class_id_list[x]],neigh[0]))
+    rank_list = []
+    for itera in range(len(near_20)):
+        score = 1
+        r_paper = near_20[itera][0]
+        refer_author = id_author_dict[r_paper]
+        refer_author_set = set(refer_author)
+        if r_paper in id_ref_dict[file_id]:
+            score += 0.75
+            print('1yes!!!')
+        if file_id in id_ref_dict[r_paper]:
+            score += 0.75
+            print('2yes!!!')
+        if len(author_set&refer_author_set) > 0:
+            score += 0.75
+            print('3yes!!!')
+        rank_list.append((r_paper,near_20[itera][1],score))
+    count_list = [[x,0] for x in range(1,11)]
+    for item in rank_list:
+        count_list[item[1]-1][1] += item[2]
+    count_list = sorted(count_list,key= lambda x:x[1],reverse = True)
+    label_info_dict[file_id] = (count_list[0],count_list[1],count_list[2])
+    log_file.write(str(label_info_dict[file_id]))
+
+        #predict_label = knnClf.predict(tran_text_data)
+        #log_file.write(file_id + ' ' + str(predict_label[0])+'\n')
+        #label_info_dict[file_id] = str(predict_label[0])
 
 log_file = open('./log.txt','w')
 tfidf_vect = TfidfVectorizer(tokenizer= my_tokenize, stop_words='english',max_df = 0.5)  #tfidf转换向量矩阵
 label_info_file = open('./label_info.txt','w')
 label_info_dict = {}
+
+#读取相关字典信息
+with open(dict_path+'new_id_ref.txt','r',encoding='utf-8') as file:
+    read_file = file.read()
+    id_ref_dict = json.loads(read_file)  #文章互相引用字典
+    '''
+    :type id_ref_dict:dict
+    '''
+
+with open(dict_path+'id_author.txt','r',encoding='utf-8') as file:
+    read_file = file.read()
+    id_author_dict = json.loads(read_file)  #文章id和他的作者
+    '''
+    :type id_author_dict:dict
+    '''
 
 #读取信息
 with open('./info_list.trn','r') as file:
@@ -76,6 +118,7 @@ for parent,dirnames,filenames in os.walk(data_dir):
                 continue
             give_label(filename)
             break
+
 
 
 label_info_json = json.dumps(label_info_dict,ensure_ascii=False)
