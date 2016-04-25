@@ -1,10 +1,12 @@
-from scipy import sparse
-import numpy as np
+import json
 
-a = np.array([1,2,0,0,0,4])
-b = sparse.csr_matrix(a)
-c = b.tocoo()
-d = b.__dict__
+with open('./reverse_label_info.txt','r',encoding='utf-8') as file:
+    read_file = file.read()
+    d = json.loads(read_file)
 
-print(d)
-print(d['indices'].tolist())
+sum = 0
+for key,value in d.items():
+    print(str(key)+':'+str(len(value)))
+    sum += len(value)
+
+print(sum)

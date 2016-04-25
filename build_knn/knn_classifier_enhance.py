@@ -14,7 +14,13 @@ import scipy.spatial.distance as dis
 '''
 
 stemmer = PorterStemmer()
-trans_table = {ord(c): None for c in string.punctuation}  #去掉标点符号的转换矩阵
+filter_s = ''
+for i in range(32):
+    filter_s += chr(i)
+for i in range(48,58):
+    filter_s += chr(i)
+filter_s += string.punctuation
+trans_table = {ord(c): None for c in filter_s}  #去掉标点符号,数字以及前32的ascii码的转换矩阵
 dict_path = '../un_mod_mat/'  #常用的字典的存储路径
 
 #还原成词根
@@ -66,12 +72,8 @@ def give_label(filename):
     count_list = sorted(count_list,key= lambda x:x[1],reverse = True)
     label_info_dict[file_id] = (count_list[0],count_list[1],count_list[2])
 
-        #predict_label = knnClf.predict(tran_text_data)
-        #log_file.write(file_id + ' ' + str(predict_label[0])+'\n')
-        #label_info_dict[file_id] = str(predict_label[0])
 
 log_file = open('./log.txt','w')
-tfidf_vect = TfidfVectorizer(tokenizer= my_tokenize, stop_words='english',max_df = 0.5)  #tfidf转换向量矩阵
 label_info_file = open('./label_info.txt','w')
 label_info_dict = {}
 
@@ -101,6 +103,8 @@ class_id_list = list(map(lambda x:x[1],info_list))  #得到文章分类结果的
 text_list = list(map(lambda x:x[2].lower(),info_list))  #包含内容的list
 text_no_punction = list(map(lambda x:x.translate(trans_table),text_list))  #文章内容去掉标点符号
 
+tfidf_vect = TfidfVectorizer(tokenizer= my_tokenize, stop_words='english',max_df = 0.7,min_df = 4/len(class_id_list))  #tfidf转换向量矩阵
+
 tfidf_mat = tfidf_vect.fit_transform(text_no_punction)  #tfidf vector
 knn_Clf = NearestNeighbors(n_neighbors=20).fit(tfidf_mat)  #构造分类器
 
@@ -118,6 +122,12 @@ for parent,dirnames,filenames in os.walk(data_dir):
             if count % 100 == 0:
                 print('Finish '+str(count/max_file))
 
+vect_file = open('../prepare/vect_file.txt','w',encoding='utf-8')
+vect_words = tfidf_vect.get_feature_names()
+for word in vect_words:
+    vect_file.write(word+'\n')
+vect_file.write(str(len(vect_words))+'\n')
+vect_file.close()
 
 label_info_json = json.dumps(label_info_dict,ensure_ascii=False)
 label_info_file.write(label_info_json)

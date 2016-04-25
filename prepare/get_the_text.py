@@ -4,14 +4,26 @@ import shutil
 
 pos_set = (2,4,6,7,9)
 
+# def in_set(file_id):
+#     for key,value in class_id_dict.items():
+#         if file_id in value:
+#             return True
+#     return False
+
 def in_set(file_id):
-    for key,value in class_id_dict.items():
-        if file_id in value:
-            return True
-    return False
+    if file_id not in label_dict:
+        return False
+
+    file_class = label_dict[file_id]
+    if file_class[0][1] == file_class[1][1]:
+        return False
+    elif file_class[0][0] in pos_set:
+        return True
+    else:
+        return False
 
 
-with open('../build_knn/label_info_v1.txt','r',encoding='utf-8') as file:
+with open('../build_knn/label_info.txt','r',encoding='utf-8') as file:
     read_file = file.read()
     label_dict = json.loads(read_file)
     '''
@@ -25,9 +37,9 @@ with open('../un_mod_mat/id_author.txt','r',encoding='utf-8') as file:
     :type id_author_dict:dict
     '''
 
-with open('./class_file.txt','r',encoding='utf-8') as file:
-    read_file = file.read()
-    class_id_dict = json.loads(read_file)
+# with open('./class_file.txt','r',encoding='utf-8') as file:
+#     read_file = file.read()
+#     class_id_dict = json.loads(read_file)
     '''
     :type class_id_dict:dict
     '''
