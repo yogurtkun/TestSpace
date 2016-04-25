@@ -48,24 +48,23 @@ def give_label(filename):
     for itera in range(len(near_20)):
         score = 1
         r_paper = near_20[itera][0]
-        refer_author = id_author_dict[r_paper]
-        refer_author_set = set(refer_author)
-        if r_paper in id_ref_dict[file_id]:
-            score += 0.75
-            print('1yes!!!')
-        if file_id in id_ref_dict[r_paper]:
-            score += 0.75
-            print('2yes!!!')
-        if len(author_set&refer_author_set) > 0:
-            score += 0.75
-            print('3yes!!!')
+        # refer_author = id_author_dict[r_paper]
+        # refer_author_set = set(refer_author)
+        # if r_paper in id_ref_dict[file_id]:
+        #     score += 0.75
+        #     print('1yes!!!')
+        # if file_id in id_ref_dict[r_paper]:
+        #     score += 0.75
+        #     print('2yes!!!')
+        # if len(author_set&refer_author_set) > 0:
+        #     score += 0.75
+        #     print('3yes!!!')
         rank_list.append((r_paper,near_20[itera][1],score))
     count_list = [[x,0] for x in range(1,11)]
     for item in rank_list:
         count_list[item[1]-1][1] += item[2]
     count_list = sorted(count_list,key= lambda x:x[1],reverse = True)
     label_info_dict[file_id] = (count_list[0],count_list[1],count_list[2])
-    log_file.write(str(label_info_dict[file_id]))
 
         #predict_label = knnClf.predict(tran_text_data)
         #log_file.write(file_id + ' ' + str(predict_label[0])+'\n')
@@ -105,20 +104,19 @@ text_no_punction = list(map(lambda x:x.translate(trans_table),text_list))  #文�
 tfidf_mat = tfidf_vect.fit_transform(text_no_punction)  #tfidf vector
 knn_Clf = NearestNeighbors(n_neighbors=20).fit(tfidf_mat)  #构造分类器
 
-'''
-修改到这里
-'''
-
 data_dir = '../lin_txt_processed/'
-# count = 0
+count = 0
+print('Start!')
 for parent,dirnames,filenames in os.walk(data_dir):
+    max_file = len(filenames)
     for filename in filenames:
         if re.match('[A-Z]\d{2}-\d{4}',filename):
             if '000' in filename:
                 continue
             give_label(filename)
-            break
-
+            count += 1
+            if count % 100 == 0:
+                print('Finish '+str(count/max_file))
 
 
 label_info_json = json.dumps(label_info_dict,ensure_ascii=False)

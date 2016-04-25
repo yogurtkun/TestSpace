@@ -1,5 +1,8 @@
 import json
 
+'''
+生成作者和作者的引用举证,去掉自引用的情况
+'''
 with open('./reverse_author.txt','r',encoding='utf-8') as file:
     read_file = file.read()
 
