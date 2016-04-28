@@ -15,9 +15,7 @@ def in_set(file_id):
         return False
 
     file_class = label_dict[file_id]
-    if file_class[0][1] == file_class[1][1]:
-        return False
-    elif file_class[0][0] in pos_set:
+    if file_class[0][0] in pos_set:
         return True
     else:
         return False
@@ -60,8 +58,6 @@ for id,sub_classes in label_dict.items():
     first_c = tuple(sub_classes[0])
     sec_c = tuple(sub_classes[1])
     thd_c = tuple(sub_classes[2])
-    if first_c[1] == sec_c[1]:
-        continue
     #如果是五个类中的文件
     if first_c[0] in pos_set:
         shutil.copyfile(src_path+id+'.txt',des_path+id+'.txt')

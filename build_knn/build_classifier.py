@@ -8,7 +8,7 @@ from nltk.stem.porter import PorterStemmer
 from sklearn.neighbors import KNeighborsClassifier
 
 '''
-建立knn分类器，并对每个文档进行分类
+建立knn分类器，并对每个文档进行分类,第一版
 '''
 
 stemmer = PorterStemmer()

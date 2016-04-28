@@ -1,7 +1,7 @@
 import json
 
 '''
-转换一下结果，标记为分类对文章id
+转换一下结果，标记为分类对文章id,已修正并运行
 '''
 
 with open('./label_info.txt','r',encoding='utf-8') as file:

@@ -12,7 +12,7 @@ id_author_dict = {}
 log_file = open('./log.txt','w')
 
 #打开id对author的dict
-with open('../un_mod_mat/id_author.txt','r') as file:
+with open('../un_mod_mat/id_author.txt','r',encoding='utf-8') as file:
     read_file = file.read()
     id_author_dict = json.loads(read_file)
 
@@ -47,7 +47,7 @@ for i in range(1,11):
     for author,scores in name_rank_dict.items():
         name_rank_list.append((author,scores[0],scores[1]))
     name_rank_list = sorted(name_rank_list,key=lambda x:x[1],reverse=True)
-    with open('./author_result/result_a_'+str(i)+'.txt','w') as file:
+    with open('./author_result/result_a_'+str(i)+'.txt','w',encoding='utf-8') as file:
         for item in name_rank_list:
             file.write(item[0]+','+str(item[2])+':'+str(item[1])+'\n')
 

@@ -21,17 +21,21 @@ with open('../build_knn/label_info.txt','r') as file:
 
 graph = nx.DiGraph()
 
-flag = '10'
+flag = 10
 
 for paper,refer_dict in id_ref_dict.items():
     if not paper in class_dict:
         continue
-    if not class_dict[paper] == flag:
+    if not class_dict[paper][0][0] == flag:
         continue
     for refer,weight in refer_dict.items():
         if not refer in class_dict:
             continue
-        if not class_dict[refer] == flag:
+        f_c = class_dict[refer][0]
+        s_c = class_dict[refer][1]
+        if f_c[1] == s_c[1]:
+            continue
+        if not f_c[0] == flag:
             continue
         graph.add_weighted_edges_from([(paper,refer,weight)])
 
@@ -47,6 +51,6 @@ for key,value in sub_scores.items():
 
 sub_scores_list = sorted(sub_scores_list,key= lambda x:x[1],reverse=True)
 
-with open('./scores_'+flag+'.txt','w') as file:
+with open('./scores_'+str(flag)+'.txt','w') as file:
     for item in sub_scores_list:
         file.write(item[0]+':'+str(item[1])+'\n')
