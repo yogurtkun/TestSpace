@@ -54,17 +54,14 @@ def give_label(filename):
     for itera in range(len(near_20)):
         score = 1
         r_paper = near_20[itera][0]
-        # refer_author = id_author_dict[r_paper]
-        # refer_author_set = set(refer_author)
-        # if r_paper in id_ref_dict[file_id]:
-        #     score += 0.75
-        #     print('1yes!!!')
-        # if file_id in id_ref_dict[r_paper]:
-        #     score += 0.75
-        #     print('2yes!!!')
-        # if len(author_set&refer_author_set) > 0:
-        #     score += 0.75
-        #     print('3yes!!!')
+        refer_author = id_author_dict[r_paper]
+        refer_author_set = set(refer_author)
+        if r_paper in id_ref_dict[file_id]:
+            score += 0.75
+        if file_id in id_ref_dict[r_paper]:
+            score += 0.75
+        if len(author_set&refer_author_set) > 0:
+            score += 0.75
         rank_list.append((r_paper,near_20[itera][1],score))
     count_list = [[x,0] for x in range(1,11)]
     for item in rank_list:
@@ -122,12 +119,12 @@ for parent,dirnames,filenames in os.walk(data_dir):
             if count % 100 == 0:
                 print('Finish '+str(count/max_file))
 
-vect_file = open('../prepare/vect_file.txt','w',encoding='utf-8')
-vect_words = tfidf_vect.get_feature_names()
-for word in vect_words:
-    vect_file.write(word+'\n')
-vect_file.write(str(len(vect_words))+'\n')
-vect_file.close()
+# vect_file = open('../prepare/vect_file.txt','w',encoding='utf-8')
+# vect_words = tfidf_vect.get_feature_names()
+# for word in vect_words:
+#     vect_file.write(word+'\n')
+# vect_file.write(str(len(vect_words))+'\n')
+# vect_file.close()
 
 label_info_json = json.dumps(label_info_dict,ensure_ascii=False)
 label_info_file.write(label_info_json)
