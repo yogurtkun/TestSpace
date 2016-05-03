@@ -7,7 +7,10 @@ import nltk
 import string
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem.porter import PorterStemmer
-from function_tool import save_sparse_csr,load_sparse_csr
+from function_tool import save_sparse_csr,save_list
+from datetime import datetime
+
+print(datetime.now())
 
 stemmer = PorterStemmer()
 filter_s = ''
@@ -46,4 +49,7 @@ tfidf_vect = TfidfVectorizer(tokenizer= my_tokenize, stop_words='english',max_df
 
 tfidf_mat = tfidf_vect.fit_transform(text_no_punction)  #tfidf vector
 
-save_sparse_csr('traning_vector')
+save_sparse_csr('traning_vector',tfidf_mat)
+save_list('./class_id.plk',class_id_list)
+
+print(datetime.now())

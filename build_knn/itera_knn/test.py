@@ -6,6 +6,9 @@ import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem.porter import PorterStemmer
 from function_tool import save_sparse_csr,load_sparse_csr
+from datetime import datetime
+
+print(datetime.now())
 
 stemmer = PorterStemmer()
 filter_s = ''
@@ -44,4 +47,4 @@ save_sparse_csr(test_file,tfidf_mat)
 t = load_sparse_csr(test_file)
 print(t)
 
-
+print(datetime.now())

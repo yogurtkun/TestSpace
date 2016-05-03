@@ -1,6 +1,7 @@
 import re
 import numpy as np
 from scipy.sparse.csr import csr_matrix
+import pickle
 
 #在应用关系中，判断引用是否合理
 
@@ -46,3 +47,20 @@ def load_sparse_csr(filename):
     loader = np.load(filename)
     return csr_matrix((  loader['data'], loader['indices'], loader['indptr']),
                          shape = loader['shape'])
+
+def save_list(filename,a_list):
+    '''
+    :param filename: str
+    :param a_list: list
+    :return: None
+    '''
+    with open(filename,'wb') as file:
+        pickle.dump(a_list,file)
+
+def load_list(filename):
+    '''
+    :param filename: str
+    :return: list
+    '''
+    with open(filename,'rb') as file:
+        return pickle.load(file)
