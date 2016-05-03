@@ -1,4 +1,6 @@
 import re
+import numpy as np
+from scipy.sparse.csr import csr_matrix
 
 #在应用关系中，判断引用是否合理
 
@@ -30,3 +32,17 @@ def get_rank_paper_list(path):
     paper_list = list(map(lambda x:re.findall(r'([A-Z]\d{2}-\d{4}):(.*?)\n',x)[0],paper_lines))
     return_list = list(map(lambda x:(x[0],float(x[1])),paper_list))
     return return_list
+
+def save_sparse_csr(filename,array):
+    np.savez(filename,data = array.data ,indices=array.indices,
+             indptr =array.indptr, shape=array.shape )
+
+def load_sparse_csr(filename):
+    '''
+    :param filename: str
+    :return: scipy.sparse.csr.csr_matrix
+    '''
+    filename += '.npz'
+    loader = np.load(filename)
+    return csr_matrix((  loader['data'], loader['indices'], loader['indptr']),
+                         shape = loader['shape'])
