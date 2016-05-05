@@ -44,11 +44,12 @@ def give_label(filename):
 
     text_data = read_file.translate(trans_table)
     tran_text_data = tfidf_vect.transform([text_data])
-    (distance,neigh) = knn_Clf.kneighbors(tran_text_data)
+    (distance,neigh) = knn_Clf.kneighbors(tran_text_data)  #得到最近的20个邻居的相对位置,可以用这个去索引
     if not file_id in id_author_dict:
         return
     author_list = id_author_dict[file_id]
     author_set = set(author_list)
+    #构成id对class_id的pattern
     near_20 = list(map(lambda x:[text_id_list[x],class_id_list[x]],neigh[0]))
     rank_list = []
     for itera in range(len(near_20)):
