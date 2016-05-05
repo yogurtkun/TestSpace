@@ -44,6 +44,7 @@ def add_data(filename):
         tf_idf_mat_new = vstack([tf_idf_mat_new,file_tf_idf])
         class_id_list.append(count_list[0][0])
         file_id_list.append(file_id)
+        log_file.write(file_id+'\n')
         return True
     else:
         return False
@@ -75,6 +76,8 @@ with open(dict_path+'id_author.txt','r',encoding='utf-8') as file:
     :type id_author_dict:dict
     '''
 
+log_file = open('./log.txt','w',encoding='utf-8')
+
 knn_clf = NearestNeighbors(n_neighbors=20).fit(tf_idf_mat)
 
 data_dir = './tf_idf_vector/'
@@ -100,5 +103,5 @@ save_list(new_path+'class_id.plk',class_id_list)
 save_list(new_path+'id_list.plk',file_id_list)
 save_sparse_csr(new_path+'traning_vector',tf_idf_mat_new)
 
-
+log_file.close()
 print(datetime.now())
