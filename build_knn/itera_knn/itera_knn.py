@@ -13,7 +13,9 @@ def add_data(filename):
     file_id = re.findall('([A-Z]\d{2}-\d{4}).npz', filename)[0]
     # 判断该文档id是否已经在训练集中
     if file_id in file_id_list:
-        return
+        return False
+    if not file_id in id_author_dict:
+        return False
     # 加载进tf-idf向量
     file_tf_idf = load_sparse_csr('./tf_idf_vector/'+file_id)
 
@@ -90,6 +92,7 @@ for parent,dirnames,filenames in os.walk(data_dir):
             if '000' in filename:
                 continue
             add_data(filename)
+            break
             count += 1
             if count % 100 == 0:
                 print('Finish '+str(count/max_file))
