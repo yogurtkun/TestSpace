@@ -86,8 +86,7 @@ for parent,dirnames,filenames in os.walk(data_dir):
         if re.match('[A-Z]\d{2}-\d{4}',filename):
             if '000' in filename:
                 continue
-            if add_data(filename):
-                break
+            add_data(filename)
             count += 1
             if count % 100 == 0:
                 print('Finish '+str(count/max_file))
