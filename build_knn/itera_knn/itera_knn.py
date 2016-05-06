@@ -4,6 +4,7 @@
 
 import json
 import os
+import scipy
 from scipy.sparse import vstack
 from function_tool import *
 from datetime import datetime
@@ -104,7 +105,8 @@ if not os.path.exists(new_path):
 
 save_list(new_path+'class_id.plk',class_id_list)
 save_list(new_path+'id_list.plk',file_id_list)
-print(type(tf_idf_mat_new))
+if not isinstance(tf_idf_mat_new,scipy.sparse.csr.csr_matrix):
+    tf_idf_mat_new = tf_idf_mat_new.tocsr()
 save_sparse_csr(new_path+'traning_vector',tf_idf_mat_new)
 
 log_file.close()
