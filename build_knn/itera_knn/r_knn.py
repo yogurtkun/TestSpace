@@ -56,7 +56,7 @@ def add_data(filename):
 
 print(datetime.now())
 
-THRESHOLD = 10
+THRESHOLD = 15
 ITERA_TIME = 1
 ITERA_NEW = ITERA_TIME + 1
 data_path = './temp_itera/iteration_'+str(ITERA_TIME)+'/'
