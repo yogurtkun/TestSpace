@@ -1,5 +1,5 @@
 '''
-迭代版的KNN,形成第一版的knn
+迭代版的KNN,之后全部是从temp_itera开始读取
 '''
 
 import json
@@ -56,11 +56,13 @@ def add_data(filename):
 
 print(datetime.now())
 
-class_id_list = load_list('./class_id.plk')
-tf_idf_mat = load_sparse_csr('./traning_vector')
-file_id_list = load_list('./id_list.plk')
 THRESHOLD = 10
 ITERA_TIME = 1
+ITERA_NEW = ITERA_TIME + 1
+data_path = './temp_itera/iteration_'+str(ITERA_TIME)+'/'
+class_id_list = load_list(data_path+'class_id.plk')
+tf_idf_mat = load_sparse_csr(data_path+'traning_vector')
+file_id_list = load_list(data_path+'id_list.plk')
 tf_idf_mat_new = tf_idf_mat.copy()
 
 #读取相关字典信息
@@ -95,10 +97,11 @@ for parent,dirnames,filenames in os.walk(data_dir):
             add_data(filename)
             count += 1
             if count % 100 == 0:
+                break
                 print('Finish '+str(count/max_file))
 
 save_path = './temp_itera/'
-new_path = save_path+'iteration_'+str(ITERA_TIME)+'/'
+new_path = save_path+'iteration_'+str(ITERA_NEW)+'/'
 if not os.path.exists(new_path):
     os.makedirs(new_path)
 
