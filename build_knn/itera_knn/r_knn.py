@@ -97,7 +97,6 @@ for parent,dirnames,filenames in os.walk(data_dir):
             add_data(filename)
             count += 1
             if count % 100 == 0:
-                break
                 print('Finish '+str(count/max_file))
 
 save_path = './temp_itera/'
