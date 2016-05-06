@@ -1,0 +1,13 @@
+acl_workshop/
+data/
+lin_txt_processed/
+.DS_Store
+.idea/
+prepare/
+__pycache__/
+
+*.py[cod]
+test.*
+*.plk
+*.npz
+log.txt
