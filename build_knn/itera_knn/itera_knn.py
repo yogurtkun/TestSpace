@@ -94,7 +94,8 @@ for parent,dirnames,filenames in os.walk(data_dir):
             add_data(filename)
             count += 1
             if count % 100 == 0:
-                print('Finish '+str(count/max_file))
+                break
+                #print('Finish '+str(count/max_file))
 
 save_path = './temp_itera/'
 new_path = save_path+'iteration_'+str(ITERA_TIME)+'/'
@@ -103,6 +104,7 @@ if not os.path.exists(new_path):
 
 save_list(new_path+'class_id.plk',class_id_list)
 save_list(new_path+'id_list.plk',file_id_list)
+print(type(tf_idf_mat_new))
 save_sparse_csr(new_path+'traning_vector',tf_idf_mat_new)
 
 log_file.close()
