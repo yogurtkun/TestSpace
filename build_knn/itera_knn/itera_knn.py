@@ -59,7 +59,7 @@ print(datetime.now())
 class_id_list = load_list('./class_id.plk')
 tf_idf_mat = load_sparse_csr('./traning_vector')
 file_id_list = load_list('./id_list.plk')
-THRESHOLD = 14
+THRESHOLD = 15
 ITERA_TIME = 1
 tf_idf_mat_new = tf_idf_mat.copy()
 
