@@ -2,7 +2,7 @@ import json
 import networkx as nx
 
 '''
-子领域的pageRank结果
+子领域的pageRank结果,just for test
 '''
 
 with open('../un_mod_mat/new_id_ref.txt','r') as file:
