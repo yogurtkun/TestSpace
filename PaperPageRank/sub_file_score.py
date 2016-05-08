@@ -5,14 +5,14 @@ import networkx as nx
 子领域的pageRank结果,针对新生成的分类数据进行计算
 '''
 
-with open('../un_mod_mat/new_id_ref.txt','r') as file:
+with open('../un_mod_mat/new_id_ref.txt','r',encoding='utf-8') as file:
     read_file = file.read()
     id_ref_dict = json.loads(read_file)
     '''
     :type id_ref_dict:dict
     '''
 
-with open('../build_knn/itera_knn/label_info.txt','r') as file:
+with open('../build_knn/itera_knn/label_info.txt','r',encoding='utf-8') as file:
     read_file = file.read()
     class_dict = json.loads(read_file)
     '''
