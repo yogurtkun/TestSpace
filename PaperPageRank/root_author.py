@@ -27,7 +27,7 @@ for i in range(1,11):
 for i in range(1,11):
     name_rank_dict = {}
     #取前百分之十的文章
-    for j in range(0,int(len(file_dict[i])/10)):
+    for j in range(0,int(len(file_dict[i])/10) if int(len(file_dict[i])/10) > 100 else 100):
         file_id = file_dict[i][j][0]
         #得到该文章的作者列表
         file_author = id_author_dict[file_id]

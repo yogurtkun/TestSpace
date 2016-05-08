@@ -21,7 +21,7 @@ with open('../build_knn/itera_knn/label_info.txt','r',encoding='utf-8') as file:
 
 graph = nx.DiGraph()
 
-flag = 9
+flag = 10
 
 for paper,refer_dict in id_ref_dict.items():
     if not paper in class_dict:
