@@ -111,7 +111,6 @@ for parent,dirnames,filenames in os.walk(data_dir):
             give_label(filename)
             count += 1
             if count % 100 == 0:
-                break
                 print('Finish '+str(count/max_file))
 
 label_info_json = json.dumps(label_info_dict,ensure_ascii=False)
@@ -119,3 +118,4 @@ label_info_file.write(label_info_json)
 
 label_info_file.close()
 log_file.close()
+print(datetime.now())
