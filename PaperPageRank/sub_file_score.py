@@ -2,7 +2,7 @@ import json
 import networkx as nx
 
 '''
-子领域的pageRank结果,just for test
+子领域的pageRank结果,针对新生成的分类数据进行计算
 '''
 
 with open('../un_mod_mat/new_id_ref.txt','r') as file:
@@ -12,7 +12,7 @@ with open('../un_mod_mat/new_id_ref.txt','r') as file:
     :type id_ref_dict:dict
     '''
 
-with open('../build_knn/label_info.txt','r') as file:
+with open('../build_knn/itera_knn/label_info.txt','r') as file:
     read_file = file.read()
     class_dict = json.loads(read_file)
     '''
@@ -21,21 +21,18 @@ with open('../build_knn/label_info.txt','r') as file:
 
 graph = nx.DiGraph()
 
-flag = 10
+flag = 9
 
 for paper,refer_dict in id_ref_dict.items():
     if not paper in class_dict:
         continue
-    if not class_dict[paper][0][0] == flag:
+    if not class_dict[paper] == flag:
         continue
     for refer,weight in refer_dict.items():
         if not refer in class_dict:
             continue
-        f_c = class_dict[refer][0]
-        s_c = class_dict[refer][1]
-        if f_c[1] == s_c[1]:
-            continue
-        if not f_c[0] == flag:
+        f_c = class_dict[refer]
+        if not f_c == flag:
             continue
         graph.add_weighted_edges_from([(paper,refer,weight)])
 
@@ -51,6 +48,6 @@ for key,value in sub_scores.items():
 
 sub_scores_list = sorted(sub_scores_list,key= lambda x:x[1],reverse=True)
 
-with open('./scores_'+str(flag)+'.txt','w') as file:
+with open('./result/scores_'+str(flag)+'.txt','w',encoding='utf-8') as file:
     for item in sub_scores_list:
         file.write(item[0]+':'+str(item[1])+'\n')
