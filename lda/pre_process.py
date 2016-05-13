@@ -5,6 +5,7 @@ import os
 import pickle
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
+from sklearn import preprocessing
 import numpy
 from nltk.stem.porter import PorterStemmer
 
@@ -78,6 +79,7 @@ result = lda.transform(tf)
 '''
 :type : numpy.ndarray
 '''
+result = preprocessing.normalize(result)
 with open('./data/topic_dis.txt','w',encoding='utf-8') as file:
     result_lists = result.tolist()
     for item in result_lists:
