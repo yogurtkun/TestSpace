@@ -23,9 +23,10 @@ proportional to (n_samples * iterations).
 
 from time import time
 
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from sklearn.decomposition import NMF, LatentDirichletAllocation
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.decomposition import LatentDirichletAllocation
 from sklearn.datasets import fetch_20newsgroups
+import pickle
 
 n_samples = 2000
 n_features = 1000
@@ -51,16 +52,6 @@ t0 = time()
 dataset = fetch_20newsgroups(shuffle=True, random_state=1,
                              remove=('headers', 'footers', 'quotes'))
 data_samples = dataset.data[:n_samples]
-print(type(data_samples))
-print("done in %0.3fs." % (time() - t0))
-
-# Use tf-idf features for NMF.
-print("Extracting tf-idf features for NMF...")
-tfidf_vectorizer = TfidfVectorizer(max_df=0.95, min_df=2,
-                                   max_features=n_features,
-                                   stop_words='english')
-t0 = time()
-tfidf = tfidf_vectorizer.fit_transform(data_samples)
 print("done in %0.3fs." % (time() - t0))
 
 # Use tf (raw term count) features for LDA.
@@ -88,3 +79,9 @@ print("done in %0.3fs." % (time() - t0))
 print("\nTopics in LDA model:")
 tf_feature_names = tf_vectorizer.get_feature_names()
 print_top_words(lda, tf_feature_names, n_top_words)
+
+log_file = open('./log.txt','wb')
+
+pickle.dump(lda,log_file)
+
+log_file.close()
