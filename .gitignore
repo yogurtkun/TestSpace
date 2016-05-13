@@ -1,6 +1,7 @@
 acl_workshop/
 data/
 lin_txt_processed/
+lda/word_bag
 .DS_Store
 .idea/
 prepare/
