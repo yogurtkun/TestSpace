@@ -64,18 +64,23 @@ for parent,dirnames,filenames in os.walk(data_dir):
             if '000' in filename:
                 continue
             add_new_paper(filename)
+print("text generation finish")
 
 tf_vectorizer = CountVectorizer(max_df=0.7, min_df=4,max_features=2000,stop_words='english')
 tf = tf_vectorizer.fit_transform(data_list)
+print("Count finish")
 
 lda = LatentDirichletAllocation(n_topics=25, max_iter=15,learning_method='online',learning_offset=50.,random_state=0)
 lda.fit(tf)
+print("LDA training finish")
 tf_feature_names = tf_vectorizer.get_feature_names()
 topic_file = open('./data/topic.txt','w',encoding='utf-8')
 print_top_words(lda, tf_feature_names, 20)
+print("Get the feature names")
 topic_file.close()
 
 result = lda.transform(tf)
+print("transform all the document to topic distribution")
 '''
 :type : numpy.ndarray
 '''
@@ -84,6 +89,12 @@ with open('./data/topic_dis.txt','w',encoding='utf-8') as file:
     result_lists = result.tolist()
     for item in result_lists:
         file.write(str(item)+'\n')
+print("save the result into the txt")
 
 with open('./data/topic_dis.plk','wb') as file:
     pickle.dump(result.tolist(),file)
+print("save the result into the plk file")
+
+with open('./data/file_id.plk','wb') as file:
+    pickle.dump(paper_id_list,file)
+
