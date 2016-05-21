@@ -62,3 +62,11 @@ def load_list(filename):
     '''
     with open(filename,'rb') as file:
         return pickle.load(file)
+
+def find_all_index(arr,item):
+    '''
+    :param arr: list
+    :param item:
+    :return: list
+    '''
+    return [i for i,a in enumerate(arr) if a==item]

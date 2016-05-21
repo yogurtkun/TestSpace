@@ -1,8 +1,8 @@
 import numpy as np
-from function_tool import load_sparse_csr,load_list
+from function_tool import load_sparse_csr,save_sparse_csr
 import json
-from math import pi
 from scipy.sparse import vstack
+from sklearn.preprocessing import normalize
 
 '''
 计算各类向量的中心
@@ -31,4 +31,8 @@ temp_list.sort(key=lambda x:x[0])
 
 cen_mat = list(map(lambda x:x[1],temp_list))
 res_mat = vstack(cen_mat)
+
+norm_res_mat = normalize(res_mat)
+
+save_sparse_csr('./cen_matrix',norm_res_mat)
 
